@@ -7,6 +7,7 @@ resetButton.textContent = 'Reset Sketchpad';
 resetButton.classList.add('resetButton');
 topBar.appendChild(resetButton);
 
+// function to create grid
 function createGrid(size) {
     for(let i = 0; i < size**2 ; i++) {
         const square = document.createElement('div');
@@ -20,13 +21,30 @@ function createGrid(size) {
 
         square.addEventListener('animationend', () => {
             square.classList.remove('hoverEffect');
-        })
+        });
+
+        // add click interation to make square change to random color
+        let click = 0;
+        let r, g, b;
+
+        square.addEventListener('click', () => {
+            if (click === 0) {
+                r = Math.floor(Math.random() * 256);
+                g = Math.floor(Math.random() * 256);
+                b = Math.floor(Math.random() * 256);
+            };
+            
+            click++;
+            square.style.backgroundColor = `rgb(${r}, ${g}, ${b}, ${click / 10})`;
+            
+            if (click === 10) click = 0;
+        });
     };
 };
 
 createGrid(16);
 
-// create reset button function to delete squares
+// reset button function
 resetButton.addEventListener("click", () => {
     const gridSize = prompt('How many squares per side do you want for your new sketchpad? Enter a number no larger than 100.','');
     if (gridSize === null) {
