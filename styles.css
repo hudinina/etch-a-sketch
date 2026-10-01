@@ -10,7 +10,7 @@ body {
     --grid-size: 16;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px 5px;
+    gap: calc((min(80vw, 80vh)) / (7*var(--grid-size) - 1));
     width: min(80vw, 80vh);
 }
 
@@ -30,7 +30,7 @@ body {
 
 .square {
     background-color: #ff38ba;
-    flex: 0 0 calc((100% - (var(--grid-size) - 1)*5px)/(var(--grid-size)));
+    flex: 0 0 calc((6*100%) / (7*var(--grid-size) - 1));
     aspect-ratio: 1;
 }
 

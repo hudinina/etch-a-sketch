@@ -7,8 +7,8 @@ resetButton.textContent = 'Reset Sketchpad';
 resetButton.classList.add('resetButton');
 topBar.appendChild(resetButton);
 
-function createInitial() {
-    for(let i = 0; i < 256; i++) {
+function createGrid(size) {
+    for(let i = 0; i < size**2 ; i++) {
         const square = document.createElement('div');
         square.classList.add('square');
         container.appendChild(square);
@@ -24,6 +24,8 @@ function createInitial() {
     };
 };
 
+createGrid(16);
+
 // create reset button function to delete squares
 resetButton.addEventListener("click", () => {
     const gridSize = prompt('How many squares per side do you want for your new sketchpad? Enter a number no larger than 100.','');
@@ -34,30 +36,8 @@ resetButton.addEventListener("click", () => {
         return;
     } else {
         container.replaceChildren();
-    
         container.style.setProperty('--grid-size', gridSize);
-
-        function createNew() {
-            for (let i = 0 ; i < (gridSize)**2 ; i++) {
-                const newSquare = document.createElement('div');
-                newSquare.classList.add('square');
-                container.appendChild(newSquare);
-
-                // add hover effect
-                newSquare.addEventListener('mouseenter', () => {
-                    newSquare.classList.add('hoverEffect');
-                });
-
-                newSquare.addEventListener('animationend', () => {
-                    newSquare.classList.remove('hoverEffect');
-                });          
-            
-                console.log(newSquare);
-            };
-        };
-
-        createNew();
-        
+        createGrid(gridSize);
     };
 });
 
